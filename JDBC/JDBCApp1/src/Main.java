@@ -21,5 +21,19 @@ public class Main {
         Connection connection = DriverManager.getConnection(url, user, password);
 
         System.out.println("Connection Established");
+
+        Statement statement = connection.createStatement();
+
+        String query = "select sname from student where sid = 1";
+
+        ResultSet rs =  statement.executeQuery(query);
+
+        rs.next();
+        String name =  rs.getString("sname");
+
+        System.out.println(name);
+        connection.close();
+        System.out.println("Connection Closed");
+
     }
 }
