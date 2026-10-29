@@ -12,12 +12,14 @@ public class Main {
         // process the results
         // close
 
-        Class.forName("org.postgresql.Driver");
+//        Class.forName("org.postgresql.Driver");
 
-        String url = "jdbc:postgresql://localhost:5432/demo";
+        String url = "jdbc:postgresql://localhost:5432/Demo";
         String user = "postgres";
-        String password = "password";
+        String password = "";
 
         Connection connection = DriverManager.getConnection(url, user, password);
+
+        System.out.println("Connection Established");
     }
 }
