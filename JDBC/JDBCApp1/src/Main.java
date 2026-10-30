@@ -17,22 +17,31 @@ public class Main {
         String url = "jdbc:postgresql://localhost:5432/Demo";
         String user = "postgres";
         String password = "";
+        String query = "select * from student";
 
         Connection connection = DriverManager.getConnection(url, user, password);
-
         System.out.println("Connection Established");
 
+
+
         Statement statement = connection.createStatement();
-
-        String query = "select sname from student where sid = 1";
-
         ResultSet rs =  statement.executeQuery(query);
+//
+//        rs.next();
+//        String name =  rs.getString("sname");
+//
+//        System.out.println(name);
 
-        rs.next();
-        String name =  rs.getString("sname");
+        while(rs.next()){
+            System.out.println(rs.getString("sname"));
+        }
 
-        System.out.println(name);
+
+
+
+
         connection.close();
+
         System.out.println("Connection Closed");
 
     }
