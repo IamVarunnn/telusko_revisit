@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "alien_table")
 public class Alien {
 
     @Id
@@ -15,6 +14,8 @@ public class Alien {
     @Column(name = "alien_name")
     private String aName;
     private String tech;
+
+    private Laptop laptop;
 
     public int getAid() {
         return aid;
@@ -40,12 +41,22 @@ public class Alien {
         this.tech = tech;
     }
 
+
+    public Laptop getLaptop() {
+        return laptop;
+    }
+
+    public void setLaptop(Laptop laptop) {
+        this.laptop = laptop;
+    }
+
     @Override
     public String toString() {
         return "Alien{" +
                 "aid=" + aid +
                 ", aName='" + aName + '\'' +
                 ", tech='" + tech + '\'' +
+                ", laptop=" + laptop +
                 '}';
     }
 }
