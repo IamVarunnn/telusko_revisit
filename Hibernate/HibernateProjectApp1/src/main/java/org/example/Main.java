@@ -24,9 +24,12 @@ public class Main {
         Session session = sessionFactory.openSession();
 
 
+        s1 = session.find(Student.class, 2);
+
+
         Transaction transaction = session.beginTransaction();
 
-        session.merge(s1);
+        session.remove(s1);
         System.out.println(s1);
         transaction.commit();
 
