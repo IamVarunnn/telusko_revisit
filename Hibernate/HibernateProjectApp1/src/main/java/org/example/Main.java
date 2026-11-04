@@ -13,12 +13,8 @@ public class Main {
         s1.setsName("Franky");
         s1.setsAge(20);
 
-//        Configuration cfg = new Configuration();
-//        cfg.addAnnotatedClass(org.example.Student.class);
-//        cfg.configure();
 
-
-//        SessionFactory sessionFactory = cfg.buildSessionFactory();
+        Student s2 = null;
 
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(org.example.Student.class)
@@ -27,14 +23,11 @@ public class Main {
 
         Session session = sessionFactory.openSession();
 
-        Transaction transaction = session.beginTransaction();
 
+        s2 = session.find(Student.class, 1);
 
         session.persist(s1);
-        transaction.commit();
-
-
-        System.out.println(s1);
+        System.out.println(s2);
 
 
 
