@@ -11,10 +11,10 @@ public class Main {
         Student s1 = new Student();
         s1.setRollNo(6);
         s1.setsName("Franky");
-        s1.setsAge(20);
+        s1.setsAge(21);
 
 
-        Student s2 = null;
+
 
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(org.example.Student.class)
@@ -24,10 +24,11 @@ public class Main {
         Session session = sessionFactory.openSession();
 
 
-        s2 = session.find(Student.class, 1);
+        Transaction transaction = session.beginTransaction();
 
-        session.persist(s1);
-        System.out.println(s2);
+        session.merge(s1);
+        System.out.println(s1);
+        transaction.commit();
 
 
 
