@@ -10,6 +10,7 @@ public class Main {
 
 
         Laptop l1 = new Laptop();
+        l1.setLid(71);
         l1.setBrand("HP");
         l1.setModel("Pav");
         l1.setRam(16);
@@ -22,6 +23,7 @@ public class Main {
 
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(org.example.Alien.class)
+                .addAnnotatedClass(org.example.Laptop.class)
                 .configure()
                 .buildSessionFactory();
 
@@ -33,10 +35,13 @@ public class Main {
 
         Transaction transaction = session.beginTransaction();
 
+        session.persist(l1);
         session.merge(a1);
         transaction.commit();
 
 
+        Alien a2 = session.find(Alien.class, 1);
+        System.out.println(a2);
 
 
         session.close();
