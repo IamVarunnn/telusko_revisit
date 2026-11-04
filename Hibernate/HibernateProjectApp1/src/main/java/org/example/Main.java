@@ -9,16 +9,22 @@ public class Main {
     static void main() {
 
         Student s1 = new Student();
-        s1.setRollNo(5);
-        s1.setsName("Eggy");
+        s1.setRollNo(6);
+        s1.setsName("Franky");
         s1.setsAge(20);
 
-        Configuration cfg = new Configuration();
-        cfg.addAnnotatedClass(org.example.Student.class);
-        cfg.configure();
+//        Configuration cfg = new Configuration();
+//        cfg.addAnnotatedClass(org.example.Student.class);
+//        cfg.configure();
 
 
-        SessionFactory sessionFactory = cfg.buildSessionFactory();
+//        SessionFactory sessionFactory = cfg.buildSessionFactory();
+
+        SessionFactory sessionFactory = new Configuration()
+                .addAnnotatedClass(org.example.Student.class)
+                .configure()
+                .buildSessionFactory();
+
         Session session = sessionFactory.openSession();
 
         Transaction transaction = session.beginTransaction();
