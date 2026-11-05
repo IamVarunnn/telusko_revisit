@@ -22,10 +22,18 @@ public class Main {
         Session session = sessionFactory.openSession();
 
 
-        Laptop l1 = session.getReference(Laptop.class, 71);
-//        System.out.println(l1);
+        Laptop l1 = session.find(Laptop.class, 71);
+        System.out.println(l1);
+
+
 
         session.close();
+
+        Session session1 = sessionFactory.openSession();
+        Laptop l2 = session1.find(Laptop.class, 71);
+        System.out.println(l2);
+
+        session1.close();
         sessionFactory.close();
     }
 }
