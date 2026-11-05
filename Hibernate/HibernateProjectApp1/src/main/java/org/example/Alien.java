@@ -14,7 +14,7 @@ public class Alien {
     private String aName;
     private String tech;
 
-    @OneToMany
+    @OneToMany(mappedBy = "alien")
     private List<Laptop> laptops;
 
 

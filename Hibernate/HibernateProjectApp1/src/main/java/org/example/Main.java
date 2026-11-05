@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.Arrays;
 
 public class Main {
-    static void main() {
+    static void main(String[] args) {
 
 
         Laptop l1 = new Laptop();
@@ -37,6 +37,11 @@ public class Main {
         a1.setTech("Go");
         a1.setLaptops(Arrays.asList(l1, l2, l3));
 
+
+        l1.setAlien(a1);
+        l2.setAlien(a1);
+        l3.setAlien(a1);
+
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(org.example.Alien.class)
                 .addAnnotatedClass(org.example.Laptop.class)
@@ -51,10 +56,11 @@ public class Main {
 
         Transaction transaction = session.beginTransaction();
 
-        session.merge(l1);
+
+        session.persist(l1);
         session.persist(l2);
         session.persist(l3);
-        session.merge(a1);
+        session.persist(a1);
         transaction.commit();
 
 
