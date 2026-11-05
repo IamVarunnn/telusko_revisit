@@ -106,11 +106,27 @@ public class Main {
         s1.setRollNo(81);
         s1.setsName("Harsh");
         s1.setsAge(19);
-        s1.setBikes(Arrays.asList(b1, b2, b3));
 
-        b1.setStudent(s1);
-        b2.setStudent(s1);
-        b3.setStudent(s1);
+
+        Student s2 = new Student();
+        s2.setRollNo(82);
+        s2.setsName("Bob");
+        s2.setsAge(20);
+
+        Student s3 = new Student();
+        s3.setRollNo(83);
+        s3.setsName("Carry");
+        s3.setsAge(20);
+
+
+        s1.setBikes(Arrays.asList(b1, b2, b3));
+        s2.setBikes(Arrays.asList(b1, b2));
+        s3.setBikes(Arrays.asList(b1, b3));
+
+
+        b1.setStudents(Arrays.asList(s1, s2, s3));
+        b2.setStudents(Arrays.asList(s1, s2));
+        b3.setStudents(Arrays.asList(s1, s3));
 
         SessionFactory sessionFactory = new Configuration()
                 .configure()
@@ -125,6 +141,8 @@ public class Main {
         session.persist(b2);
         session.persist(b3);
         session.persist(s1);
+        session.persist(s2);
+        session.persist(s3);
 
         transaction.commit();
         session.close();

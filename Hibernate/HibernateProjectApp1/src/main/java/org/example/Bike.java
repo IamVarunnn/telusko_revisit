@@ -1,9 +1,6 @@
 package org.example;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -14,15 +11,15 @@ public class Bike {
     private int bikeId;
     private String bikeName;
 
-    @ManyToOne
-    private Student student;
+    @ManyToMany
+    private List<Student> students;
 
-    public Student getStudent() {
-        return student;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
     public int getBikeId() {
