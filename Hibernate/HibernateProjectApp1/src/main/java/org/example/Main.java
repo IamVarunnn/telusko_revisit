@@ -31,6 +31,8 @@ public class Main {
 
 
 
+
+
         Alien a1 = new Alien();
         a1.setAid(1);
         a1.setaName("Alex");
@@ -38,9 +40,23 @@ public class Main {
         a1.setLaptops(Arrays.asList(l1, l2, l3));
 
 
-        l1.setAlien(a1);
-        l2.setAlien(a1);
-        l3.setAlien(a1);
+        Alien a2 = new Alien();
+        a2.setAid(2);
+        a2.setaName("Bob");
+        a2.setTech("Py");
+        a2.setLaptops(Arrays.asList(l1, l2));
+
+        Alien a3 = new Alien();
+        a3.setAid(3);
+        a3.setaName("Carry");
+        a3.setTech("JS");
+        a3.setLaptops(Arrays.asList(l3));
+
+
+        l1.setAliens(Arrays.asList(a1, a2));
+        l2.setAliens(Arrays.asList(a1, a2));
+        l3.setAliens(Arrays.asList(a1, a3));
+
 
         SessionFactory sessionFactory = new Configuration()
                 .addAnnotatedClass(org.example.Alien.class)
@@ -61,6 +77,8 @@ public class Main {
         session.persist(l2);
         session.persist(l3);
         session.persist(a1);
+        session.persist(a2);
+        session.persist(a3);
         transaction.commit();
 
 

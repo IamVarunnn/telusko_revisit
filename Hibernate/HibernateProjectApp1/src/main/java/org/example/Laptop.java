@@ -1,9 +1,8 @@
 package org.example;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Laptop {
@@ -14,16 +13,9 @@ public class Laptop {
     private String model;
     private int ram;
 
-    @ManyToOne
-    private Alien alien;
+    @ManyToMany
+    private List<Alien> aliens;
 
-    public Alien getAlien() {
-        return alien;
-    }
-
-    public void setAlien(Alien alien) {
-        this.alien = alien;
-    }
 
     public String getBrand() {
         return brand;
@@ -55,6 +47,14 @@ public class Laptop {
 
     public void setLid(int lid) {
         this.lid = lid;
+    }
+
+    public List<Alien> getAliens() {
+        return aliens;
+    }
+
+    public void setAliens(List<Alien> aliens) {
+        this.aliens = aliens;
     }
 
     @Override
