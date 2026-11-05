@@ -13,7 +13,7 @@ public class Laptop {
     private String model;
     private int ram;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "laptops")
     private List<Alien> aliens;
 
 

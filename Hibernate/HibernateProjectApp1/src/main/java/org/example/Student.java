@@ -2,7 +2,10 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+
+import java.util.List;
 
 @Entity
 public class Student {
@@ -12,8 +15,8 @@ public class Student {
     private String sName;
     private int sAge;
 
-    @OneToOne
-    private Bike bike;
+    @OneToMany(mappedBy = "student")
+    private List<Bike> bikes;
 
     public int getRollNo() {
         return rollNo;
@@ -39,12 +42,12 @@ public class Student {
         this.sAge = sAge;
     }
 
-    public Bike getBike() {
-        return bike;
+    public List<Bike> getBikes() {
+        return bikes;
     }
 
-    public void setBike(Bike bike) {
-        this.bike = bike;
+    public void setBikes(List<Bike> bikes) {
+        this.bikes = bikes;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class Student {
                 "rollNo=" + rollNo +
                 ", sName='" + sName + '\'' +
                 ", sAge=" + sAge +
-                ", bike=" + bike +
+                ", bikes=" + bikes +
                 '}';
     }
 }
