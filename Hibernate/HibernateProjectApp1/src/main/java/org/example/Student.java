@@ -2,6 +2,7 @@ package org.example;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Student {
@@ -10,6 +11,9 @@ public class Student {
     private int rollNo;
     private String sName;
     private int sAge;
+
+    @OneToOne
+    private Bike bike;
 
     public int getRollNo() {
         return rollNo;
@@ -35,12 +39,21 @@ public class Student {
         this.sAge = sAge;
     }
 
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "rollNo=" + rollNo +
                 ", sName='" + sName + '\'' +
                 ", sAge=" + sAge +
+                ", bike=" + bike +
                 '}';
     }
 }
