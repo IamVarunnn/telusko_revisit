@@ -22,12 +22,12 @@
 <!--        <constructor-arg name="age" value="21"/>-->
 
     <property name="age" value="21"/>
-<!--    <property name="com" ref="com"/>-->
+    <property name="com" ref="com2"/>
     </bean>
 
 
     <bean id = "com1" class = "com.varun.Laptop" primary="true"></bean>
-    <bean id = "com" class = "com.varun.Desktop"></bean>
+    <bean id = "com2" class = "com.varun.Desktop" lazy-init="true"></bean>
 
 </beans>
 

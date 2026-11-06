@@ -17,6 +17,7 @@ public class App {
 
 
 
+//        Desktop desktop = (Desktop) context.getBean("com2");
 
 
     }
