@@ -6,42 +6,36 @@ import java.beans.ConstructorProperties;
 public class Alien {
 
     private int age;
-    private Laptop lap;
+    private Computer com;
 
-    Alien(){
-        System.out.println("Object Created");
-    }
-
-//    public Alien(int age){
-//        System.out.println("Para constructor called");
-//        this.age = age;
+//    public Alien(){
+//        System.out.println("Object Created");
 //    }
 
-    @ConstructorProperties({"age", "lap"})
-    public Alien(int age, Laptop laptop){
-        this.age = age;
-        this.lap = laptop;
-    }
+//    @ConstructorProperties({"age", "lap"})
+//    public Alien(int age, Computer com){
+//        this.age = age;
+//        this.com = com;
+//    }
 
     public int getAge() {
         return age;
     }
 
     public void setAge(int age) {
-        System.out.println("Setter called");
         this.age = age;
     }
 
-    void code(){
-        System.out.println("Alien coding....");
-        lap.compile();
+    public Computer getCom() {
+        return com;
     }
 
-    public Laptop getLap() {
-        return lap;
+    public void setCom(Computer com) {
+        this.com = com;
     }
 
-    public void setLap(Laptop lap) {
-        this.lap = lap;
+    public void code(){
+        System.out.println("Coding");
+        com.compile();
     }
 }

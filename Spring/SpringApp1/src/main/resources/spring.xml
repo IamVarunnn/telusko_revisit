@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id = "alien" class = "com.varun.Alien" >
+    <bean id = "alien" class = "com.varun.Alien" autowire="byType">
 <!--        <constructor-arg type="com.varun.Laptop" ref="lap-bean"/>-->
 <!--        <constructor-arg type="int" value="21"/>-->
 
@@ -18,15 +18,16 @@
 <!--        <constructor-arg name="age" value="21"/>-->
 <!--        <constructor-arg name="lap" ref="lap-bean"/>-->
 
-        <constructor-arg name="lap" ref="lap-bean"/>
-        <constructor-arg name="age" value="21"/>
+<!--        <constructor-arg name="lap" ref="lap-bean"/>-->
+<!--        <constructor-arg name="age" value="21"/>-->
 
-
-
+    <property name="age" value="21"/>
+<!--    <property name="com" ref="com"/>-->
     </bean>
 
 
-    <bean id = "lap-bean" class = "com.varun.Laptop"></bean>
+    <bean id = "com1" class = "com.varun.Laptop"></bean>
+<!--    <bean id = "com" class = "com.varun.Desktop"></bean>-->
 
 </beans>
 
