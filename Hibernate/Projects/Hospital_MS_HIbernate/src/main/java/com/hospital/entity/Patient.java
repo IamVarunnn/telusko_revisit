@@ -1,4 +1,4 @@
-package com.hospital;
+package com.hospital.entity;
 
 import jakarta.persistence.*;
 

@@ -2,22 +2,26 @@
     <session-factory>
 
         <!-- Database Connection -->
-        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hospital</property>
 
-        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.username">root</property>
 
-        <property name="hibernate.connection.password">1234</property>
+        <property name="hibernate.connection.password">admin@910</property>
 
         <!-- Hibernate Configuration -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
 
         <!-- Schema Management -->
         <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="com.hospital.entity.Patient"/>
+        <mapping class="com.hospital.entity.Doctor"/>
+        <mapping class="com.hospital.entity.Appointment"/>
 
     </session-factory>
 </hibernate-configuration>

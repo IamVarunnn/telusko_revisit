@@ -1,138 +1,124 @@
 package com.hospital;
 
+import com.hospital.dao.AppointmentDAO;
+import com.hospital.dao.DoctorDAO;
+import com.hospital.dao.PatientDAO;
+import com.hospital.entity.Doctor;
+import com.hospital.entity.Patient;
+import org.hibernate.SessionFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Hospital_Main {
-    private static final String url = "jdbc:mysql://localhost:3306/hospital";
-    private static final String username = "your_username";
-    private static final String password = "your_password";
 
     static void main() {
 
-
         Scanner scanner = new Scanner(System.in);
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
 
-            Patient patient = new Patient(connection, scanner);
-            Doctor doctor = new Doctor(connection);
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-            while(true){
+        PatientDAO patientDAO = new PatientDAO();
+        DoctorDAO doctorDAO = new DoctorDAO();
+        AppointmentDAO appointmentDAO = new AppointmentDAO();
 
-                System.out.println("HOSPITAL MANAGEMENT SYSTEM ");
-                System.out.println("1. Add Patient");
-                System.out.println("2. View Patients");
-                System.out.println("3. View Doctors");
-                System.out.println("4. Book Appointment");
-                System.out.println("5. Exit");
-                System.out.println("Enter your choice: ");
-                int choice = scanner.nextInt();
+        while (true) {
 
-                switch (choice){
-                    case 1:
-                        // Add Patient
-                        patient.addPatient();
-                        System.out.println("Patient added successfully!");
-                        break;
-                    case 2:
-                        // View Patient
-                        patient.viewPatients();
-                        System.out.println();
-                        break;
-                    case 3:
-                        // View Doctors
-                        doctor.viewDoctors();
-                        System.out.println();
-                        break;
-                    case 4:
-                        // Book Appointment
-                        bookAppointment(patient, doctor, connection, scanner);
-                        System.out.println();
-                        break;
-                    case 5:
-                        return;
-                    default:
-                        System.out.println("Enter valid choice");
-                }
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+            System.out.println("\nHOSPITAL MANAGEMENT SYSTEM");
+            System.out.println("1. Add Patient");
+            System.out.println("2. View Patients");
+            System.out.println("3. View Doctors");
+            System.out.println("4. Book Appointment");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
 
-    public static void bookAppointment(Patient patient, Doctor doctor, Connection connection, Scanner scanner){
+            int choice = scanner.nextInt();
 
-        System.out.println("Enter Patient id: ");
-        int patientId = scanner.nextInt();
-        System.out.println("Enter Doctor id: ");
-        int doctorId = scanner.nextInt();
-        System.out.print("Enter appointment date (YYYY-MM-DD)");
-        String appointmentDate = scanner.next();
+            switch (choice) {
 
-        if(patient.getPatientId(patientId) && doctor.getDoctorId(doctorId)){
+                case 1:
+                    Patient patient = new Patient();
 
-            if(checkDoctorAvailability(doctorId, appointmentDate, connection)){
-                String appointmentQuery = "INSERT INTO appointments (patient_id, doctor_id, appointment_date) VALUES (?, ?, ?)";
+                    System.out.print("Enter patient name: ");
+                    patient.setName(scanner.next());
 
-                try {
-                    PreparedStatement preparedStatement = connection.prepareStatement(appointmentQuery);
-                    preparedStatement.setInt(1, patientId);
-                    preparedStatement.setInt(2, doctorId);
-                    preparedStatement.setString(3, appointmentDate);
+                    System.out.print("Enter patient age: ");
+                    patient.setAge(scanner.nextInt());
 
-                    int rowsAffected = preparedStatement.executeUpdate();
+                    System.out.print("Enter patient gender: ");
+                    patient.setGender(scanner.next());
 
-                    if(rowsAffected > 0){
-                        System.out.println("Appointment Booked");
+                    patientDAO.addPatient(patient);
+
+                    System.out.println("Patient added successfully!");
+                    break;
+
+                case 2:
+
+                    List<Patient> patients = patientDAO.viewPatients();
+
+
+                    System.out.println("\nPatients:");
+                    System.out.println("+------------+--------------------+------------+------------+");
+                    System.out.println("| Patient Id | Name               | Age        | Gender     |");
+                    System.out.println("+------------+--------------------+------------+------------+");
+
+                    for (Patient p : patients) {
+                        System.out.printf("| %-10d | %-18s | %-10d | %-10s |%n",
+                                p.getId(),
+                                p.getName(),
+                                p.getAge(),
+                                p.getGender());
                     }
-                    else{
-                        System.out.println("Failed to book appointment");
+
+                    System.out.println("+------------+--------------------+------------+------------+");
+                    break;
+
+                case 3:
+
+                    List<Doctor> doctors = doctorDAO.viewDoctors();
+
+                    System.out.println("\nDoctors:");
+                    System.out.println("+------------+--------------------+------------------+");
+                    System.out.println("| Doctor Id  | Name               | Specialization   |");
+                    System.out.println("+------------+--------------------+------------------+");
+
+                    for (Doctor d : doctors) {
+                        System.out.printf("| %-10d | %-18s | %-16s |%n",
+                                d.getId(),
+                                d.getName(),
+                                d.getSpecialization());
                     }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-            else{
-                System.out.println("Doctor is not available on this date");
-            }
-        }
-        else {
-            System.out.println("Either doctor or patient does not exists");
-        }
-    }
 
-    private static boolean checkDoctorAvailability(int doctorId, String appointmentDate, Connection connection) {
+                    System.out.println("+------------+--------------------+------------------+");
+                    break;
 
-        String query = "SELECT COUNT(*) FROM appointments WHERE doctor_id = ? AND appointment_date = ?";
+                case 4:
+                    System.out.print("Enter Patient ID: ");
+                    int patientId = scanner.nextInt();
 
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, doctorId);
-            preparedStatement.setString(2, appointmentDate);
+                    System.out.print("Enter Doctor ID: ");
+                    int doctorId = scanner.nextInt();
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+                    System.out.print("Enter appointment date (YYYY-MM-DD): ");
+                    LocalDate date = LocalDate.parse(scanner.next());
 
-            if(resultSet.next()){
-                int count = resultSet.getInt(1);
+                    String result = appointmentDAO.bookAppointment(
+                            patientId, doctorId, date
+                    );
 
-                if(count == 0){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                    System.out.println(result);
+                    break;
+
+                case 5:
+                    scanner.close();
+                    sessionFactory.close();
+                    return;
+
+                default:
+                    System.out.println("Enter valid choice");
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return false;
     }
 }
