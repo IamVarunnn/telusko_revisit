@@ -9,5 +9,8 @@
     <!-- bean definitions here -->
     <bean id = "alien" class = "com.varun.Alien"></bean>
 
+
+    <bean id = "lap" class = "com.varun.Laptop"></bean>
+
 </beans>
 
