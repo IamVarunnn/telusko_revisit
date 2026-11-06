@@ -1,6 +1,7 @@
 package com.varun;
 
 
+import java.beans.ConstructorProperties;
 
 public class Alien {
 
@@ -9,6 +10,17 @@ public class Alien {
 
     Alien(){
         System.out.println("Object Created");
+    }
+
+//    public Alien(int age){
+//        System.out.println("Para constructor called");
+//        this.age = age;
+//    }
+
+    @ConstructorProperties({"age", "lap"})
+    public Alien(int age, Laptop laptop){
+        this.age = age;
+        this.lap = laptop;
     }
 
     public int getAge() {

@@ -8,10 +8,21 @@
 
     <!-- bean definitions here -->
     <bean id = "alien" class = "com.varun.Alien" >
-        <property name="age" value="21"></property>
-<!--        // the name lap comes from the obj used in alien-->
-<!--            the second comes from the bean down -->
-        <property name="lap" ref="lap-bean"></property>
+<!--        <constructor-arg type="com.varun.Laptop" ref="lap-bean"/>-->
+<!--        <constructor-arg type="int" value="21"/>-->
+
+<!--        <constructor-arg index="1" ref="lap-bean"/>-->
+<!--        <constructor-arg index="0" value="21"/>-->
+
+<!--        follow the seq below -->
+<!--        <constructor-arg name="age" value="21"/>-->
+<!--        <constructor-arg name="lap" ref="lap-bean"/>-->
+
+        <constructor-arg name="lap" ref="lap-bean"/>
+        <constructor-arg name="age" value="21"/>
+
+
+
     </bean>
 
 
