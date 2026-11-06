@@ -5,6 +5,7 @@ package com.varun;
 public class Alien {
 
     private int age;
+    private Laptop lap;
 
     Alien(){
         System.out.println("Object Created");
@@ -21,5 +22,14 @@ public class Alien {
 
     void code(){
         System.out.println("Alien coding....");
+        lap.compile();
+    }
+
+    public Laptop getLap() {
+        return lap;
+    }
+
+    public void setLap(Laptop lap) {
+        this.lap = lap;
     }
 }

@@ -9,10 +9,13 @@
     <!-- bean definitions here -->
     <bean id = "alien" class = "com.varun.Alien" >
         <property name="age" value="21"></property>
+<!--        // the name lap comes from the obj used in alien-->
+<!--            the second comes from the bean down -->
+        <property name="lap" ref="lap-bean"></property>
     </bean>
 
 
-    <bean id = "lap" class = "com.varun.Laptop"></bean>
+    <bean id = "lap-bean" class = "com.varun.Laptop"></bean>
 
 </beans>
 
