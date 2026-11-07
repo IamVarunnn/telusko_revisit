@@ -9,9 +9,11 @@ public class App {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Desktop desktop = context.getBean(Desktop.class);
-        Desktop desktop1 = context.getBean(Desktop.class);
-        desktop.compile();
-        desktop1.compile();
+
+
+        Alien obj = context.getBean(Alien.class);
+
+        System.out.println(obj.getAge());
+        obj.code();
     }
 }
