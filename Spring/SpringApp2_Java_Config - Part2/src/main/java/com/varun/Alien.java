@@ -3,6 +3,7 @@ package com.varun;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,7 @@ public class Alien {
         return age;
     }
 
+    @Value(value = "30")
     public void setAge(int age) {
         this.age = age;
     }
