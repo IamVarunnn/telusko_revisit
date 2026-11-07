@@ -6,6 +6,7 @@ import com.varun.Computer;
 import com.varun.Desktop;
 import com.varun.Laptop;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -26,7 +27,7 @@ public class AppConfig {
     }
 
     @Bean
-    public Alien alien(@Autowired Computer computer){
+    public Alien alien(@Qualifier("desktop") @Autowired Computer computer){
         Alien alien = new Alien();
         alien.setAge(24);
         alien.setCom(computer);
