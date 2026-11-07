@@ -27,7 +27,7 @@ public class AppConfig {
     }
 
     @Bean
-    public Alien alien(@Qualifier("desktop") @Autowired Computer computer){
+    public Alien alien(@Autowired Computer computer){
         Alien alien = new Alien();
         alien.setAge(24);
         alien.setCom(computer);
