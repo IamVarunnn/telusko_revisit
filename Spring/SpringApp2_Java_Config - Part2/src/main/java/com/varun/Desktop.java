@@ -1,8 +1,9 @@
 package com.varun;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("com")
 public class Desktop implements Computer{
 
     public Desktop(){
