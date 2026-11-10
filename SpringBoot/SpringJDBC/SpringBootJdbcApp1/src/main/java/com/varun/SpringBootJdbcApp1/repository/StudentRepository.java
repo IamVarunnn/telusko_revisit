@@ -53,6 +53,8 @@ public class StudentRepository {
             }
         };
 
-        jdbc.query(sql, mapper);
+        List<Student> students = jdbc.query(sql, mapper);
+
+        return students;
     }
 }
