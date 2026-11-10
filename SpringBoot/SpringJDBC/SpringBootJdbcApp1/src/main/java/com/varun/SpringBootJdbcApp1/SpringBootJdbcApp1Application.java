@@ -1,6 +1,7 @@
 package com.varun.SpringBootJdbcApp1;
 
 import com.varun.SpringBootJdbcApp1.model.Student;
+import com.varun.SpringBootJdbcApp1.service.StudentService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +17,8 @@ public class SpringBootJdbcApp1Application {
 		s.setName("Krish");
 		s.setMarks(40);
 
-
+		StudentService service = context.getBean(StudentService.class);
+		service.addStudent(s);
 	}
 
 }
