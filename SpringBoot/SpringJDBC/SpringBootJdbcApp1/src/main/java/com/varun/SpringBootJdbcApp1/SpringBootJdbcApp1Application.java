@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.List;
+
 @SpringBootApplication
 public class SpringBootJdbcApp1Application {
 
@@ -19,6 +21,9 @@ public class SpringBootJdbcApp1Application {
 
 		StudentService service = context.getBean(StudentService.class);
 		service.addStudent(s);
+
+		List<Student> students = service.getStudents();
+		System.out.println(students);
 	}
 
 }
