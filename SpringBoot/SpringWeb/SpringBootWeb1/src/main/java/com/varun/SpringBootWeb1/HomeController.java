@@ -2,6 +2,7 @@ package com.varun.SpringBootWeb1;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,13 @@ public class HomeController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request){
+    public String add(HttpServletRequest request, HttpSession session){
 
         int n1 = Integer.parseInt(request.getParameter("num1"));
         int n2 = Integer.parseInt(request.getParameter("num2"));
 
         int res = n1 + n2;
-        System.out.println(res);
+        session.setAttribute("result", res);
         return "result.jsp";
 
 

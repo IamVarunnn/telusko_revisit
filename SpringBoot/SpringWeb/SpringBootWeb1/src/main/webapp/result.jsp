@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Result is :</h1>
+    <h1>Result is : ${result}</h1>
 
 </body>
 </html>
