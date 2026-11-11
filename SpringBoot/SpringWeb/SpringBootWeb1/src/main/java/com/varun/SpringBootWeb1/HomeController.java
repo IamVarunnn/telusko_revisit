@@ -19,13 +19,24 @@ public class HomeController {
         return "index.jsp";
     }
 
+//    @RequestMapping("/add")
+//    public String add(HttpServletRequest request, HttpSession session){
+//
+//        int n1 = Integer.parseInt(request.getParameter("num1"));
+//        int n2 = Integer.parseInt(request.getParameter("num2"));
+//
+//        int res = n1 + n2;
+//        session.setAttribute("result", res);
+//        return "result.jsp";
+//
+//
+//    }
+
     @RequestMapping("/add")
-    public String add(HttpServletRequest request, HttpSession session){
+    public String add(int num1, int num2, HttpSession session){
 
-        int n1 = Integer.parseInt(request.getParameter("num1"));
-        int n2 = Integer.parseInt(request.getParameter("num2"));
 
-        int res = n1 + n2;
+        int res = num1 + num2;
         session.setAttribute("result", res);
         return "result.jsp";
 
