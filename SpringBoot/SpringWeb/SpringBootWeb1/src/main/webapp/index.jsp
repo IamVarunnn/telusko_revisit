@@ -6,10 +6,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Hello World</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Hello World!</h1>
-    <p>Welcome to my first JSP application.</p>
+
+    <form action="add">
+
+        <label>First Number:</label>
+        <input type="number" name="num1" placeholder="Enter first number" required>
+
+        <label>Second Number:</label>
+        <input type="number" name="num2" placeholder="Enter second number" required>
+
+        <button type="submit">Add Numbers</button>
+
+    </form>
 
 
 </body>
