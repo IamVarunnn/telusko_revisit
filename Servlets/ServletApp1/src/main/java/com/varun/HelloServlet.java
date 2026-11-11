@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 
 public class HelloServlet extends HttpServlet {
 
+    // service - doGet / doPost / doPut ....
+
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("Hello In Service");
 
