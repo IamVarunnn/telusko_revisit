@@ -1,0 +1,25 @@
+package com.varun.JobApp_1.service;
+
+import com.varun.JobApp_1.model.JobPost;
+import com.varun.JobApp_1.repository.JobRepo;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class JobService {
+
+    private final JobRepo jobRepo;
+
+    public void addJob(JobPost jobPost){
+
+        jobRepo.addJob(jobPost);
+    }
+
+    public List<JobPost> getAllJobs(){
+
+        return jobRepo.getAllJobs();
+    }
+}
