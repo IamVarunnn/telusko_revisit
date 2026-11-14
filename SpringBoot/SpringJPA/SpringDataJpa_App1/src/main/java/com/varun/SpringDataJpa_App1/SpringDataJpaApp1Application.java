@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.util.List;
+
 @SpringBootApplication
 public class SpringDataJpaApp1Application {
 
@@ -33,6 +35,15 @@ public class SpringDataJpaApp1Application {
 		repo.save(s1);
 		repo.save(s2);
 		repo.save(s3);
+
+//		Student s = repo.findById(103).orElseThrow();
+//		System.out.println(s);
+
+		List<Student> students = repo.findAll();
+
+		for(Student st : students){
+			System.out.println(st);
+		}
 	}
 
 }
