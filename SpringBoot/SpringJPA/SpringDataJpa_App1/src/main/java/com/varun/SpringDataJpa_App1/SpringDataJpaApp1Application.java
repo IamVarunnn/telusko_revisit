@@ -45,11 +45,9 @@ public class SpringDataJpaApp1Application {
 //			System.out.println(st);
 //		}
 
-		 List<Student> students = repo.findByName("Amit");
 
-		 for(Student s : students){
-			 System.out.println(s);
-		 }
+		repo.save(s2);
+
 	}
 
 }
