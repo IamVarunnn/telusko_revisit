@@ -27,4 +27,14 @@ public class JobService {
 
         return jobRepo.getJob(postId);
     }
+
+    public JobPost updateJob(JobPost jobPost) {
+
+        jobRepo.updateJob(jobPost);
+        return jobRepo.getJob(jobPost.getPostId());
+    }
+
+    public void deleteJob(int postId) {
+        jobRepo.deleteJob(postId);
+    }
 }
