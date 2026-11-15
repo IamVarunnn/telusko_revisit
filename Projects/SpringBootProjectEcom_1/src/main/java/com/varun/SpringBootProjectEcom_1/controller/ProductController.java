@@ -5,6 +5,8 @@ import com.varun.SpringBootProjectEcom_1.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,8 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping("/products")
-    public List<Product> getProducts(){
+    public ResponseEntity<List<Product>> getProducts(){
 
-        return service.getAllProducts();
+        return new ResponseEntity<>(service.getAllProducts(), HttpStatus.ACCEPTED);
     }
 }
