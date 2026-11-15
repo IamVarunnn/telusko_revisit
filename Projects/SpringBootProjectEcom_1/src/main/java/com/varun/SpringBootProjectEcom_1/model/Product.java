@@ -1,4 +1,4 @@
-package com.varun.SpringBootProjectEcom_1.mode;
+package com.varun.SpringBootProjectEcom_1.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
