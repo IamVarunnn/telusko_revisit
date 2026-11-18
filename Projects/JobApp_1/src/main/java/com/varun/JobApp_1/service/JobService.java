@@ -15,11 +15,11 @@ public class JobService {
 
     public void addJob(JobPost jobPost){
 
-        jobRepo.addJob(jobPost);
+        jobRepo.save(jobPost);
     }
 
     public List<JobPost> getAllJobs(){
 
-        return jobRepo.getAllJobs();
+        return jobRepo.findAll();
     }
 }
