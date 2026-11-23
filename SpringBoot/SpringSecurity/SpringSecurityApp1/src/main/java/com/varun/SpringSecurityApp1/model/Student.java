@@ -1,4 +1,4 @@
-package com.varun.SpringSecurityApp1;
+package com.varun.SpringSecurityApp1.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.varun.SpringSecurityApp1;
+package com.varun.SpringSecurityApp1.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
