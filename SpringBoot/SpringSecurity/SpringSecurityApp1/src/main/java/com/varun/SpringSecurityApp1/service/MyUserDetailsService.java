@@ -1,6 +1,7 @@
 package com.varun.SpringSecurityApp1.service;
 
 import com.varun.SpringSecurityApp1.model.User;
+import com.varun.SpringSecurityApp1.model.UserPrincipal;
 import com.varun.SpringSecurityApp1.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,6 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
 
-
+        return new UserPrincipal(user);
     }
 }
