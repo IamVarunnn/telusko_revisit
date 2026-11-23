@@ -14,40 +14,38 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+
+        http.csrf(customizer -> customizer.disable())
+                .authorizeHttpRequests(request -> request.anyRequest().authenticated()).httpBasic(Customizer.withDefaults())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        return http.build();
+    }
+
+//        @Bean
+//        public SecurityFilterChain securityFilterChain(HttpSecurity http){
 //
-//        http.csrf(customizer -> customizer.disable());
-//        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
-////        http.formLogin(Customizer.withDefaults());
-//        http.httpBasic(Customizer.withDefaults());
-//        http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//              Customizer<CsrfConfigurer<HttpSecurity>> custCsrf = new Customizer<CsrfConfigurer<HttpSecurity>>() {
+//                  @Override
+//                  public void customize(CsrfConfigurer<HttpSecurity> configurer) {
+//                          configurer.disable();
+//                  }
+//              };
 //
-//        return http.build();
-//    }
-
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http){
-
-              Customizer<CsrfConfigurer<HttpSecurity>> custCsrf = new Customizer<CsrfConfigurer<HttpSecurity>>() {
-                  @Override
-                  public void customize(CsrfConfigurer<HttpSecurity> configurer) {
-                          configurer.disable();
-                  }
-              };
-
-              Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> custHttp = new Customizer<AuthorizeHttpRequestsConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>() {
-                  @Override
-                  public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-                        registry.anyRequest().authenticated();
-                  }
-              };
-
-
-              http.authorizeHttpRequests(custHttp);
-
-              http.csrf(custCsrf);
-
-            return http.build();
-        }
+//              Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> custHttp = new Customizer<AuthorizeHttpRequestsConfigurer<org.springframework.security.config.annotation.web.builders.HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>() {
+//                  @Override
+//                  public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
+//                        registry.anyRequest().authenticated();
+//                  }
+//              };
+//
+//
+//              http.authorizeHttpRequests(custHttp);
+//
+//              http.csrf(custCsrf);
+//
+//            return http.build();
+//        }
 }
