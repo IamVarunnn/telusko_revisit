@@ -2,6 +2,7 @@ package com.varun.SpringSecurityApp2.service;
 
 import com.varun.SpringSecurityApp2.Dao.UserRepo;
 import com.varun.SpringSecurityApp2.model.User;
+import com.varun.SpringSecurityApp2.model.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,6 +24,6 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User 404");
         }
 
-        return (UserDetails) user;
+        return new UserPrincipal(user);
     }
 }
