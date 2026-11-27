@@ -1,5 +1,6 @@
 package com.varun.SpringSecurityApp2.config;
 
+import com.varun.SpringSecurityApp2.filter.JwtFilter;
 import jakarta.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
