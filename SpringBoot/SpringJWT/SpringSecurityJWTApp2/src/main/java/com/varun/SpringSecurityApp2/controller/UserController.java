@@ -1,6 +1,7 @@
 package com.varun.SpringSecurityApp2.controller;
 
 import com.varun.SpringSecurityApp2.model.User;
+import com.varun.SpringSecurityApp2.service.JwtService;
 import com.varun.SpringSecurityApp2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,9 @@ public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtService jwtService;
+
     @PostMapping("/register")
     public User register(@RequestBody User user){
         return userService.save(user);
@@ -33,7 +37,7 @@ public class UserController {
 
 
         if(authentication.isAuthenticated()){
-            return "Success";
+            return jwtService.generateToken(user.getUsername());
         }
         return "Failed";
     }
