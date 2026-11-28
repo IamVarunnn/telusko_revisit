@@ -1,5 +1,6 @@
 package com.varun.SpringAI_App1;
 
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,17 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OpenAIController {
 
-    private ChatModel chatModel;
+    private ChatClient chatClient;
 
     public OpenAIController(ChatModel chatModel){
-        this.chatModel = chatModel;
+        this.chatClient = ChatClient.create(chatModel);
     }
 
     @GetMapping("/api/{message}")
     public String getAnswer(@PathVariable String message){
 
-        String response = chatModel.call(message);
+        String response = chatClient.prompt(message)
+                            .call()
+                            .content();
 
-        return response;
+        return "With Chat Client " + response;
     }
 }
