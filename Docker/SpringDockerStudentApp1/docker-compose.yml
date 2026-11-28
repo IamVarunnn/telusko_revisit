@@ -1,5 +1,4 @@
 
-version: "3.8"
 
 services:
   app:
@@ -7,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      s-network:
+      - s-network
 
 
   postgres:
@@ -20,8 +19,14 @@ services:
     ports:
       - "5432:5432"
     networks:
-      s-network:
+      - s-network
+    volumes:
+      - postgres-s-data:/var/lib/postgresql
 
 networks:
   s-network:
     driver: bridge
+
+
+volumes:
+  postgres-s-data:
