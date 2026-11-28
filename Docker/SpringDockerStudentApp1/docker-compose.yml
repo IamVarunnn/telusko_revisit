@@ -1,0 +1,18 @@
+
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+
+  postgres:
+    image: postgres:latest
+    container_name: shop-postgres
+    environment:
+      POSTGRES_DB: Demo
+      POSTGRES_USER: alex
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
