@@ -1,47 +1,48 @@
 package com.varun.SpringAI_App1;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.session.SessionService;
+import org.springframework.ai.session.advisor.SessionAdvisors;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
-
 
 @RestController
 public class OpenAIController {
 
-    private ChatClient chatClient;
+    private final ChatClient chatClient;
 
-
-    // for multiple models
-//    public OpenAIController(ChatModel chatModel){
-//        this.chatClient = ChatClient.create(chatModel);
-//    }
-
-    // for only one ai model
-    public OpenAIController(ChatClient.Builder chatClientBuilder){
-        this.chatClient = chatClientBuilder.build();
+    // Option A: Attach SessionAdvisors directly using the auto-configured SessionService
+    public OpenAIController(ChatClient.Builder chatClientBuilder, SessionService sessionService) {
+        this.chatClient = chatClientBuilder
+                .defaultAdvisors(SessionAdvisors.builder(sessionService).build())
+                .build();
     }
 
+    // Option B: If you already defined a @Bean ChatClient in a @Configuration class, use this instead:
+    // public OpenAIController(ChatClient chatClient) {
+    //     this.chatClient = chatClient;
+    // }
+
     @GetMapping("/api/{message}")
-    public ResponseEntity<String> getAnswer(@PathVariable String message){
+    public ResponseEntity<String> getAnswer(
+            @RequestParam(defaultValue = "default-session") String sessionId,
+            @PathVariable String message) {
 
         ChatResponse chatResponse = chatClient
-                            .prompt(message)
-                            .call()
-                            .chatResponse();
+                .prompt(message)
+                .advisors(SessionAdvisors.session(sessionId))
+                .call()
+                .chatResponse();
 
         System.out.println(chatResponse.getMetadata().getModel());
-
 
         String response = chatResponse.getResult()
                 .getOutput()
                 .getText();
-
-
 
         return ResponseEntity.ok(response);
     }
